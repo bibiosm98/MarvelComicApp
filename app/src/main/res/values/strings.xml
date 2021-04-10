@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MarvelComicApp by Kotlin</string>
+    <string name="app_name">MarvelComicApp</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_search">Search</string>
