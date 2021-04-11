@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.search.SearchFragment">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fake_search_actionbar"
@@ -38,7 +37,7 @@
         android:layout_height="wrap_content"
         android:background="@color/white_two"
         app:layout_constraintTop_toBottomOf="@+id/fake_search_actionbar"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         >
     </androidx.recyclerview.widget.RecyclerView>
 
