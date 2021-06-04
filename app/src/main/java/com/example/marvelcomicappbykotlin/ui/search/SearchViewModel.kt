@@ -1,13 +1,15 @@
 package com.example.marvelcomicappbykotlin.ui.search
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.marvelcomicappbykotlin.ui.MainViewModel
 
-class SearchViewModel : ViewModel() {
+class SearchViewModel : MainViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+    fun onTitleSelected(title: String){
+        getMarvelAppComics(title, 20)
+        Log.i("TITLE", title)
     }
-    val text: LiveData<String> = _text
 }

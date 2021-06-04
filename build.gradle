@@ -25,8 +25,8 @@ buildscript {
         classpath "com.android.tools.build:gradle:$version_android_gradle_plugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
-        classpath 'com.android.databinding:dataBinder:1.0-rc1'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+//        classpath 'com.android.databinding:dataBinder:1.0-rc1'
+//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
 

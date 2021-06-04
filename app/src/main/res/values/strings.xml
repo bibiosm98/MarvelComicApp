@@ -11,4 +11,6 @@
     <string name="search_hint">Search for a comic book</string>
     <string name="search_view_info">Start typing to find particular comics.</string>
     <string name="search_view_no_comics_find">There is not comic book "Antmon" in our library. Check the spelling and try again.</string>
+    <string name="written_by">written by</string>
+    <string name="lorremipsum">Przykładowy tekst 9. ()dd\"ASD\" zobaczmy co z tego wyjdzie, halooooooo, witamy na stażu. Kopiuj wklej, kopiuj szybciej, szybciej, potrzebujemy więcej torfu do ogrzania naszych jajeczek.</string>
 </resources>

@@ -1,60 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<layout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools" >-->
+
+<!--    <data>-->
+<!--        <variable-->
+<!--            name="comic"-->
+<!--            type="com.example.marvelcomicappbykotlin.network.Comic" />-->
+<!--    </data>-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:background="@drawable/round_10dp"
 >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/comicConstraint"
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="9dp">
 
-    <ImageView
-        android:id="@+id/comic_item_imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/round_10dp"
-        android:src="@color/strawberry"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+            <ImageView
+                android:id="@+id/comic_item_imageView"
+                android:layout_width="115dp"
+                android:layout_height="174dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic"
+            />
+<!--            "app:imageUrl="@{comic.thumbnail.path}"-->
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toEndOf="@+id/comic_item_imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+                <TextView
+                    android:id="@+id/comicTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyle"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    tools:text="@string/lorremipsum"
+                    android:paddingStart="131dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/comic_item_imageView"
+                    app:layout_constraintRight_toRightOf="parent"
+                />
 
+                <TextView
+                    android:id="@+id/comicAuthors"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:lines="1"
+                    android:ellipsize="end"
+                    tools:text="@string/lorremipsum"
+                    style="@style/TextStyle3"
+                    android:paddingStart="131dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@+id/comicTitle"
+                    app:layout_constraintLeft_toRightOf="@+id/comic_item_imageView"
+                    app:layout_constraintRight_toRightOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tytuł"
-            style="@style/TextStyle"
-            app:layout_constraintStart_toEndOf="@+id/comic_item_imageView"
-            app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/comicDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextStyle4"
+                    android:ellipsize="end"
+                    android:maxLines="6"
+                    tools:text="@string/lorremipsum"
+                    android:paddingStart="131dp"
+                    android:paddingEnd="0dp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintTop_toBottomOf="@id/comicAuthors"
+                    app:layout_constraintLeft_toRightOf="@+id/comic_item_imageView"
+                    app:layout_constraintRight_toRightOf="@+id/comicConstraint"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextStyle3"
-            android:text="Autorzy" />
+</androidx.cardview.widget.CardView>
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TextStyle4"
-            android:text="Opis sdaasdsafasfasf" />
-
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--</layout>-->

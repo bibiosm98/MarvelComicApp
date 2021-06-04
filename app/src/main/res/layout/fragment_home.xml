@@ -1,80 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.example.marvelcomicappbykotlin.ui.home.HomeViewModel" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.marvelcomicappbykotlin.ui.home.HomeViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         tools:context=".ui.home.HomeFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fake_home_actionbar"
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/fake_home_actionbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="@color/white"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+
+<!--            >-->
+<!--            &lt;!&ndash;        android:paddingTop="?attr/actionBarSize"&ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/fragment_home_title"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="16dp"-->
+<!--                android:text="@string/name"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="30sp"-->
+<!--                android:textStyle="bold"-->
+<!--                style="@style/TextStyle2"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comicRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
+            android:background="@color/brown_grey"
+            android:paddingBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:itemCount="10"
+            tools:listitem="@layout/comic_item"
             >
-            <!--        android:paddingTop="?attr/actionBarSize"-->
+        </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/fragment_home_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="@string/name"
-                android:textAlignment="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                style="@style/TextStyle2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="0dp"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/fake_home_actionbar"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            tools:itemCount="40"-->
-<!--            tools:listitem="@layout/grid_view_item"-->
-<!--            >-->
-
-<!--        </androidx.recyclerview.widget.RecyclerView>-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/response"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{viewModel.comic.thumbnail.path}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/fake_home_actionbar" />-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/edit"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="@{viewModel.comic.thumbnail.path}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/response" />-->
-
-
+<!--        app:listData="@{viewModel.comicList}"-->
+<!--        android:adjustViewBounds="true"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
