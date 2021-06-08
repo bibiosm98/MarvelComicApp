@@ -2,6 +2,7 @@ package com.example.marvelcomicappbykotlin
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -18,6 +19,15 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.hide()
 
         val navController = findNavController(R.id.nav_host_fragment)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if(destination.id == R.id.detailFragment) {
+                navView.visibility = View.GONE
+            } else {
+                navView.visibility = View.VISIBLE
+            }
+        }
+
         val appBarConfiguration = AppBarConfiguration(setOf(
                 R.id.navigation_home,  R.id.navigation_search))
         setupActionBarWithNavController(navController, appBarConfiguration)

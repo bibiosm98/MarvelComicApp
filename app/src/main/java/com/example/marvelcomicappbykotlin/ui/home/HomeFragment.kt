@@ -55,12 +55,12 @@ class HomeFragment : Fragment(), OnComicItemLongClick {
     }
 
     override fun onComicItemLongClick(comic: Comic, position: Int) {
-        Log.d("OnClick", comic.toString())
+//        Log.d("OnClick", comic.toString())
         viewModel.displayComicDetails(comic)
-        comic.title.let {
-            Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
-//            Log.i("data", it.toString())
-        }
-        Log.i("data", comic.toString())
+//        comic.title.let {
+//            Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+////            Log.i("data", it.toString())
+//        }
+//        Log.i("data", comic.toString())
     }
 }

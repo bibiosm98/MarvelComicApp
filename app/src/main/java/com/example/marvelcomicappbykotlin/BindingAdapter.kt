@@ -16,7 +16,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?){
     requestOptions = requestOptions.transforms(CenterCrop())//, RoundedCorners(16))
 
     imgUrl?.let{
-        val imgUri = it.toUri().buildUpon().scheme("https").appendPath("/landscape_incredible.jpg").build()
+        val imgUri = it.toUri().buildUpon().scheme("https").appendPath("/landscape_xlarge.jpg").build()
         Glide.with(imgView.context)
             .load(imgUri)
             .apply(requestOptions)
@@ -33,7 +33,7 @@ fun bindStatus(statusImageView: ImageView, status: MarvelApiStatus?) {
     when (status) {
         MarvelApiStatus.WAITING -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.book_open_icon)
+            statusImageView.setImageResource(R.drawable.loading_animation)
         }
         MarvelApiStatus.LOADING -> {
             statusImageView.visibility = View.VISIBLE
@@ -41,7 +41,7 @@ fun bindStatus(statusImageView: ImageView, status: MarvelApiStatus?) {
         }
         MarvelApiStatus.ERROR -> {
             statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.book_open_icon)
+            statusImageView.setImageResource(R.drawable.loading_image)
         }
         MarvelApiStatus.DONE -> {
             statusImageView.visibility = View.GONE

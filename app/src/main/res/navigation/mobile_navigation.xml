@@ -26,6 +26,7 @@
             android:id="@+id/search_to_detail_fragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.example.marvelcomicappbykotlin.ui.detail.DetailFragment"

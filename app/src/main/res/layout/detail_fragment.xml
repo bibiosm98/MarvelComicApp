@@ -16,7 +16,7 @@
         >
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="261dp"
+            android:layout_height="500dp"
             app:imageUrl="@{viewModel.selectedComic.thumbnail.path}"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

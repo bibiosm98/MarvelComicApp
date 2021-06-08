@@ -3,6 +3,7 @@ package com.example.marvelcomicappbykotlin.ui.search
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 //import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.example.marvelcomicappbykotlin.MainActivity
 import com.example.marvelcomicappbykotlin.R
 import com.example.marvelcomicappbykotlin.databinding.FragmentSearchBinding
@@ -17,6 +19,11 @@ import com.example.marvelcomicappbykotlin.network.Comic
 import com.example.marvelcomicappbykotlin.network.MarvelApiStatus
 import com.example.marvelcomicappbykotlin.ui.ComicAdapter
 import com.example.marvelcomicappbykotlin.ui.OnComicItemLongClick
+import com.example.marvelcomicappbykotlin.ui.home.HomeFragmentDirections
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.internal.NavigationMenu
+import com.google.android.material.snackbar.Snackbar
 
 class SearchFragment : Fragment(), OnComicItemLongClick {
 
@@ -41,29 +48,36 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
         binding.lifecycleOwner = this
         binding.comicSearchRecyclerView.adapter = adapter
 
+
+        searchViewModel.navigateToSelectedComic.observe(viewLifecycleOwner, Observer {
+            if(null != it){
+                this.findNavController().navigate(SearchFragmentDirections.searchToDetailFragment(it))
+                searchViewModel.displayComicDetailsComplete()
+            }
+        })
+
         searchViewModel.status.observe(viewLifecycleOwner, Observer {
             when(it){
                 MarvelApiStatus.WAITING -> {
                     binding.searchInfo.visibility = View.VISIBLE
                     binding.searchInfo.setText(R.string.search_start)
                 }
-                    MarvelApiStatus.LOADING -> {
+                MarvelApiStatus.LOADING -> {
                     binding.searchInfo.visibility = View.GONE
                 }
-                    MarvelApiStatus.ERROR -> {
+                MarvelApiStatus.ERROR -> {
                     binding.searchInfo.visibility = View.VISIBLE
                     binding.searchInfo.text = resources.getString(R.string.search_error, title)
                 }
-                    MarvelApiStatus.DONE -> {
+                MarvelApiStatus.DONE -> {
                     binding.searchInfo.visibility = View.GONE
                 }
-                    else -> {
+                else -> {
 
                 }
             }
         })
 
-//        requireActivity().actionBar?.hide()
         return binding.root
     }
 
@@ -78,6 +92,7 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        {
 //        menu.clear()
 //        inflater.inflate(R.menu.search_menu, menu)
 //        searchView = SearchView(((context as MainActivity).supportActionBar?.themedContext ?: context)!!)
@@ -106,6 +121,7 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
 //        searchView.setOnClickListener {view ->
 //            view.findFocus()
 //        }
+        }
 /////////////
         searchView = binding.mySearchView
         searchView.queryHint = resources.getString(R.string.search_hint)
@@ -128,14 +144,27 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
 
         searchView.setOnClickListener{
             binding.cancelBtn.visibility = View.VISIBLE
+            Snackbar.make(requireView(), "setOnClickListener", Snackbar.LENGTH_SHORT).show()
+            searchView.setIconifiedByDefault(false)
         }
         searchView.setOnSearchClickListener {
             binding.cancelBtn.visibility = View.VISIBLE
+            Snackbar.make(requireView(), "setOnSearchClickListener", Snackbar.LENGTH_SHORT).show()
+            searchView.setIconifiedByDefault(false)
         }
         searchView.setOnCloseListener {
             binding.cancelBtn.visibility = View.GONE
             return@setOnCloseListener false
         }
+        searchView.setOnContextClickListener{
+            Snackbar.make(requireView(), "setOnContextClickListener", Snackbar.LENGTH_SHORT).show()
+            return@setOnContextClickListener false
+        }
+        searchView.setOnFocusChangeListener{view, hasFocus ->
+            binding.cancelBtn.visibility = View.VISIBLE
+
+        }
+
         binding.cancelBtn.setOnClickListener{
             searchView.focusable = SearchView.NOT_FOCUSABLE
             searchView.clearFocus()
@@ -154,6 +183,6 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
     }
 
     override fun onComicItemLongClick(comic: Comic, position: Int) {
-//        TODO("Not yet implemented")
+        searchViewModel.displayComicDetails(comic)
     }
 }
