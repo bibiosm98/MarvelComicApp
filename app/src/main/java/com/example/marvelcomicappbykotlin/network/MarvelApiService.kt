@@ -14,6 +14,7 @@ import retrofit2.http.Query
 
 private const val BASE_URL = "https://gateway.marvel.com/"
 
+enum class MarvelApiStatus { WAITING, LOADING, ERROR, DONE}
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .add(NULL_TO_EMPTY_STRING_ADAPTER)

@@ -12,43 +12,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         tools:context=".ui.home.HomeFragment">
-
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:id="@+id/fake_home_actionbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/white"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-
-<!--            >-->
-<!--            &lt;!&ndash;        android:paddingTop="?attr/actionBarSize"&ndash;&gt;-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/fragment_home_title"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="16dp"-->
-<!--                android:text="@string/name"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="30sp"-->
-<!--                android:textStyle="bold"-->
-<!--                style="@style/TextStyle2"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comicRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/brown_grey"
+            android:background="@color/very_light_pink"
             android:paddingBottom="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"

@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.marvelcomicappbykotlin.network.Comic
 import com.example.marvelcomicappbykotlin.network.MarvelApi
-import com.example.marvelcomicappbykotlin.ui.home.MarvelApiStatus
+import com.example.marvelcomicappbykotlin.network.MarvelApiStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,12 +17,14 @@ open class MainViewModel: ViewModel() {
     val status: LiveData<MarvelApiStatus>
         get() = _status
 
-    private val _comicList = MutableLiveData<List<Comic>>()
-    val comicList: LiveData<List<Comic>>
+    private val _comicList = MutableLiveData<List<Comic>?>()
+    val comicList: LiveData<List<Comic>?>
         get() = _comicList
-//
-//    val pureComicList: List<Comic>
-//        get() = _comicList.value!!
+
+    private val _navigateToSelectedComic = MutableLiveData<Comic>()
+    val navigateToSelectedComic: LiveData<Comic>
+        get() = _navigateToSelectedComic
+
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -37,6 +39,7 @@ open class MainViewModel: ViewModel() {
                 limit
             ) // default limit="20"
             try {
+                _comicList.value = ArrayList()
                 _status.value = MarvelApiStatus.LOADING
                 val listResult = getPropertyDeferred.await()
                 if (listResult.data.total > 0) {
@@ -44,6 +47,8 @@ open class MainViewModel: ViewModel() {
                     _comicList.value = listResult.data.results
                     Log.i("LIST SIZE", _comicList.value!!.size.toString())
                     Log.i("LIST", _comicList.value.toString())
+                }else{
+                    _status.value = MarvelApiStatus.ERROR
                 }
             } catch (t: Throwable) {
                 _status.value = MarvelApiStatus.ERROR
@@ -54,5 +59,16 @@ open class MainViewModel: ViewModel() {
 
     fun clearComicList(){
         _comicList.value = null;
+    }
+
+    fun displayComicDetails(comic: Comic) {
+        _navigateToSelectedComic.value = comic
+    }
+
+    fun displayComicDetailsComplete() {
+        _navigateToSelectedComic.value = null
+    }
+    fun setStatus(newStatus: MarvelApiStatus){
+        _status.value = newStatus
     }
 }

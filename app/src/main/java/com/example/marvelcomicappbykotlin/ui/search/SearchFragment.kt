@@ -7,20 +7,23 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.marvelcomicappbykotlin.MainActivity
 import com.example.marvelcomicappbykotlin.R
 import com.example.marvelcomicappbykotlin.databinding.FragmentSearchBinding
 import com.example.marvelcomicappbykotlin.network.Comic
+import com.example.marvelcomicappbykotlin.network.MarvelApiStatus
 import com.example.marvelcomicappbykotlin.ui.ComicAdapter
-import com.example.marvelcomicappbykotlin.ui.home.OnComicItemLongClick
+import com.example.marvelcomicappbykotlin.ui.OnComicItemLongClick
 
 class SearchFragment : Fragment(), OnComicItemLongClick {
 
     private lateinit var binding: FragmentSearchBinding
     private lateinit var searchView: SearchView
     private val adapter = ComicAdapter(this)
+    private var title = ""
 
     private val searchViewModel: SearchViewModel by lazy {
         ViewModelProvider(this).get(SearchViewModel::class.java)
@@ -37,6 +40,29 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
         binding.viewModel = searchViewModel
         binding.lifecycleOwner = this
         binding.comicSearchRecyclerView.adapter = adapter
+
+        searchViewModel.status.observe(viewLifecycleOwner, Observer {
+            when(it){
+                MarvelApiStatus.WAITING -> {
+                    binding.searchInfo.visibility = View.VISIBLE
+                    binding.searchInfo.setText(R.string.search_start)
+                }
+                    MarvelApiStatus.LOADING -> {
+                    binding.searchInfo.visibility = View.GONE
+                }
+                    MarvelApiStatus.ERROR -> {
+                    binding.searchInfo.visibility = View.VISIBLE
+                    binding.searchInfo.text = resources.getString(R.string.search_error, title)
+                }
+                    MarvelApiStatus.DONE -> {
+                    binding.searchInfo.visibility = View.GONE
+                }
+                    else -> {
+
+                }
+            }
+        })
+
 //        requireActivity().actionBar?.hide()
         return binding.root
     }
@@ -52,9 +78,9 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-////        menu.clear()
+//        menu.clear()
 //        inflater.inflate(R.menu.search_menu, menu)
-//        searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
+//        searchView = SearchView(((context as MainActivity).supportActionBar?.themedContext ?: context)!!)
 //        menu.findItem(R.id.search).apply {
 //            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
 //            actionView = searchView
@@ -80,7 +106,7 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
 //        searchView.setOnClickListener {view ->
 //            view.findFocus()
 //        }
-
+/////////////
         searchView = binding.mySearchView
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -88,6 +114,7 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
                 Log.i("TEXT SUB", query ?: "")
                 searchView.clearFocus()
                 searchViewModel.onTitleSelected(query ?: "")
+                title = query.toString()
                 Log.i("SIZE ", searchViewModel.comicList.value?.size.toString())
                 binding.cancelBtn.visibility = View.GONE
                 return false
@@ -120,7 +147,9 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         searchViewModel.comicList.observe(viewLifecycleOwner){ list ->
-            adapter.setComicList(list)
+            if (list != null) {
+                adapter.setComicList(list)
+            }
         }
     }
 

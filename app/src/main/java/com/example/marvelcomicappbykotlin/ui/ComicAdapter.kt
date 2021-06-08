@@ -12,8 +12,12 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.marvelcomicappbykotlin.R
 import com.example.marvelcomicappbykotlin.network.Comic
-import com.example.marvelcomicappbykotlin.ui.home.OnComicItemLongClick
 
+interface OnComicItemLongClick{
+    fun onComicItemLongClick(comic: Comic, position: Int)
+}
+
+@Suppress("DEPRECATION")
 class ComicAdapter(private val listener: OnComicItemLongClick): RecyclerView.Adapter<ComicAdapter.ComicViewHolder>(){
     private val comicList = ArrayList<Comic>()
 
