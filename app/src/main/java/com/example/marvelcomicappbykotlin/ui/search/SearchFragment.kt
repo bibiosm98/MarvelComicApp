@@ -106,7 +106,7 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
         })
 
 
-        // I know, this is sphagetti to fix, but i looking for better way of implementing this "Cancel" action
+        // I know, this is spaghetti to fix, but i looking for better way of implementing this "Cancel" action
         searchView.setOnClickListener{
             binding.cancelBtn.visibility = View.VISIBLE
             searchView.setIconifiedByDefault(false)
