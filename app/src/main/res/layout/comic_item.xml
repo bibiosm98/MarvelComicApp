@@ -36,7 +36,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@tools:sample/backgrounds/scenic"
             />
-<!--            "app:imageUrl="@{comic.thumbnail.path}"-->
 
                 <TextView
                     android:id="@+id/comicTitle"

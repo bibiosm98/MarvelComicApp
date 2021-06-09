@@ -45,8 +45,8 @@ open class MainViewModel: ViewModel() {
                 if (listResult.data.total > 0) {
                     _status.value = MarvelApiStatus.DONE
                     _comicList.value = listResult.data.results
-                    Log.i("LIST SIZE", _comicList.value!!.size.toString())
-                    Log.i("LIST", _comicList.value.toString())
+//                    Log.i("LIST SIZE", _comicList.value!!.size.toString())
+//                    Log.i("LIST", _comicList.value.toString())
                 }else{
                     _status.value = MarvelApiStatus.ERROR
                 }
@@ -68,6 +68,7 @@ open class MainViewModel: ViewModel() {
     fun displayComicDetailsComplete() {
         _navigateToSelectedComic.value = null
     }
+
     fun setStatus(newStatus: MarvelApiStatus){
         _status.value = newStatus
     }

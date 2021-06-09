@@ -22,8 +22,15 @@ data class Comic (
     var title: String,
     var description: String?,
     var thumbnail: Thumbnail,
-    var creators: Creators
+    var creators: Creators,
+    var urls: List<Urls>
 ): Parcelable
+
+@Parcelize
+data class Urls(
+    var url: String
+): Parcelable
+
 
 @Parcelize
 data class Thumbnail(

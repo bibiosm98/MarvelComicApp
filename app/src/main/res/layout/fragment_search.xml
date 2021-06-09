@@ -94,5 +94,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_image"
             />
+
+        <ProgressBar
+            android:id="@+id/search_progressbar"
+            android:theme="@style/ProgressBarStyle"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

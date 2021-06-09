@@ -30,6 +30,15 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="ProgressBarStyle">
+        <item name="colorAccent">@color/strawberry</item>
+    </style>
+
+<!--    <style name="NavigationTheme" parent="AppTheme">-->
+<!--        <item name="android:textSize">162sp</item>-->
+<!--        <item name="android:layout_marginBottom">22dp</item>-->
+<!--    </style>-->
+
     <style name="TextStyle">
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>

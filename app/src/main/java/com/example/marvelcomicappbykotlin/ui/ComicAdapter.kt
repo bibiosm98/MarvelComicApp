@@ -63,8 +63,8 @@ class ComicAdapter(private val listener: OnComicItemLongClick): RecyclerView.Ada
             .apply(RequestOptions().transform(RoundedCorners(16)))
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_round_home_24)
-                    .error(R.drawable.ic_round_search_24)
+                    .placeholder(R.drawable.marvel_placeholder)
+//                    .error(R.drawable.ic_round_search_24)
             )
             .into(image)
     }

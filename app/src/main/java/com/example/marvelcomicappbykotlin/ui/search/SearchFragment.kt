@@ -1,10 +1,7 @@
 package com.example.marvelcomicappbykotlin.ui.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
-//import android.widget.SearchView
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,18 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
-import com.example.marvelcomicappbykotlin.MainActivity
 import com.example.marvelcomicappbykotlin.R
 import com.example.marvelcomicappbykotlin.databinding.FragmentSearchBinding
 import com.example.marvelcomicappbykotlin.network.Comic
 import com.example.marvelcomicappbykotlin.network.MarvelApiStatus
 import com.example.marvelcomicappbykotlin.ui.ComicAdapter
 import com.example.marvelcomicappbykotlin.ui.OnComicItemLongClick
-import com.example.marvelcomicappbykotlin.ui.home.HomeFragmentDirections
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.internal.NavigationMenu
-import com.google.android.material.snackbar.Snackbar
 
 class SearchFragment : Fragment(), OnComicItemLongClick {
 
@@ -60,16 +51,20 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
             when(it){
                 MarvelApiStatus.WAITING -> {
                     binding.searchInfo.visibility = View.VISIBLE
+                    binding.searchProgressbar.visibility = View.GONE
                     binding.searchInfo.setText(R.string.search_start)
                 }
                 MarvelApiStatus.LOADING -> {
                     binding.searchInfo.visibility = View.GONE
+                    binding.searchProgressbar.visibility = View.VISIBLE
                 }
                 MarvelApiStatus.ERROR -> {
                     binding.searchInfo.visibility = View.VISIBLE
+                    binding.searchProgressbar.visibility = View.GONE
                     binding.searchInfo.text = resources.getString(R.string.search_error, title)
                 }
                 MarvelApiStatus.DONE -> {
+                    binding.searchProgressbar.visibility = View.GONE
                     binding.searchInfo.visibility = View.GONE
                 }
                 else -> {
@@ -92,77 +87,29 @@ class SearchFragment : Fragment(), OnComicItemLongClick {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        {
-//        menu.clear()
-//        inflater.inflate(R.menu.search_menu, menu)
-//        searchView = SearchView(((context as MainActivity).supportActionBar?.themedContext ?: context)!!)
-//        menu.findItem(R.id.search).apply {
-//            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
-//            actionView = searchView
-//        }
-//
-//        searchView.queryHint = resources.getString(R.string.search_hint)
-//
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String): Boolean {
-//                Log.i("TEXT SUB", query)
-//                searchView.clearFocus()
-////                searchView.setQuery("googd job!", false)
-//                searchViewModel.onTitleSelected(query)
-//                Log.i("SIZE ", searchViewModel.comicList.value?.size.toString())
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String): Boolean {
-//                Log.i("TEXT", newText)
-//                return false
-//            }
-//        })
-//        searchView.setOnClickListener {view ->
-//            view.findFocus()
-//        }
-        }
-/////////////
+
         searchView = binding.mySearchView
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Log.i("TEXT SUB", query ?: "")
                 searchView.clearFocus()
                 searchViewModel.onTitleSelected(query ?: "")
                 title = query.toString()
-                Log.i("SIZE ", searchViewModel.comicList.value?.size.toString())
                 binding.cancelBtn.visibility = View.GONE
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                Log.i("TEXT", newText ?: "")
+                binding.cancelBtn.visibility = View.VISIBLE
                 return false
             }
         })
 
+
+        // I know, this is sphagetti to fix, but i looking for better way of implementing this "Cancel" action
         searchView.setOnClickListener{
             binding.cancelBtn.visibility = View.VISIBLE
-            Snackbar.make(requireView(), "setOnClickListener", Snackbar.LENGTH_SHORT).show()
             searchView.setIconifiedByDefault(false)
-        }
-        searchView.setOnSearchClickListener {
-            binding.cancelBtn.visibility = View.VISIBLE
-            Snackbar.make(requireView(), "setOnSearchClickListener", Snackbar.LENGTH_SHORT).show()
-            searchView.setIconifiedByDefault(false)
-        }
-        searchView.setOnCloseListener {
-            binding.cancelBtn.visibility = View.GONE
-            return@setOnCloseListener false
-        }
-        searchView.setOnContextClickListener{
-            Snackbar.make(requireView(), "setOnContextClickListener", Snackbar.LENGTH_SHORT).show()
-            return@setOnContextClickListener false
-        }
-        searchView.setOnFocusChangeListener{view, hasFocus ->
-            binding.cancelBtn.visibility = View.VISIBLE
-
         }
 
         binding.cancelBtn.setOnClickListener{

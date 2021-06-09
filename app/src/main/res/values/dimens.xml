@@ -6,5 +6,6 @@
     <dimen name="bottom_navigation_icon_size" tools:override="true">32dp</dimen>
     <dimen name="bottom_navigation_icon_size_2" tools:override="true">40dp</dimen>
 
-
+    <dimen tools:override="true" name="design_navigation_separator_vertical_padding">122dp</dimen>
+    <dimen tools:override="true" name="design_navigation_icon_padding">162dp</dimen>
 </resources>

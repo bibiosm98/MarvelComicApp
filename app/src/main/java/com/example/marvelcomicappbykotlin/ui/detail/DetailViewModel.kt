@@ -15,4 +15,18 @@ class DetailViewModel(comic: Comic, app: Application) : AndroidViewModel(app) {
     init {
         _selectedComic.value = comic
     }
+
+    fun getAuthors(): String{
+        var authorsList = ""
+        val items = _selectedComic.value?.creators?.items
+        if(!items?.isEmpty()!!){
+            authorsList = "written by "
+            items.forEach{ auth ->
+                authorsList += auth.name + ", "
+            }
+            authorsList = authorsList.substring(0, authorsList.length - 2);
+        }
+
+        return authorsList
+    }
 }

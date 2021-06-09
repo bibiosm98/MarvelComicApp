@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        tools:override="true"
         android:id="@+id/navigation_home"
         android:icon="@drawable/ic_round_home_24"
         android:title="@string/title_home"
     />
 
     <item
+        android:title=""
+        />
+
+    <item
+        tools:override="true"
         android:id="@+id/navigation_search"
         android:icon="@drawable/ic_round_search_24"
         android:title="@string/title_search"
